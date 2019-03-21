@@ -30,6 +30,8 @@ const startHttpServer = async function () {
 
   app.use(logger(":id :remote-addr :method :url :status :response-time"));
 
+  app.use('/health-check', (req, res) => {res.send('ok');});
+
   app.use(helmet({ frameguard: { action: "deny" } }));
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: false }));
