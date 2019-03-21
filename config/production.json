@@ -1,0 +1,14 @@
+{
+    "PORT": 3002,
+    "DB_CONNECTION_STRING": "postgres://rakesh:rakesh@localhost:5432/chatapp",
+    "SESSION_COOKIE_SECURE": false,
+    "PROJECT_NAME": "chatapp",
+    "GOOGLE_CLIENT_ID": [
+        "631684094252-riivbvb0f9664f5qc2ivnepmf48mdvr9.apps.googleusercontent.com"
+    ],
+    "GOOGLE_CLIENT_SECRET": "slVE-ejJKmq8oOs39Xu42SGi",
+    "REDIS_PORT": 6379,
+    "REDIS_HOST": "127.0.0.1",
+    "secret": "secret",
+    "FACEBOOK_APP_ID": "1135737433261071"
+    }
