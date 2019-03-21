@@ -13,7 +13,7 @@ export const chat = {
     }
   },
   actions: {
-    setSelectedUser ({commit, state} , data) {
+    setSelectedUser ({commit} , data) {
       commit(types.SET_SELECTED_USER, data);
     }
   }
