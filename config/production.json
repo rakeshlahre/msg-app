@@ -1,6 +1,6 @@
 {
     "PORT": 3002,
-    "DB_CONNECTION_STRING": "postgres://rakesh:rakesh@localhost:5432/chatapp",
+    "DB_CONNECTION_STRING": "postgres://jysyoqkwnynmom:9c053a160476b794bee3f3cb7c698ea5b4001b3a00df5987c4b2c5b0ab61a161@ec2-174-129-10-235.compute-1.amazonaws.com:5432/d46uaatquvi7bq",
     "SESSION_COOKIE_SECURE": false,
     "PROJECT_NAME": "chatapp",
     "GOOGLE_CLIENT_ID": [
