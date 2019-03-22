@@ -8,15 +8,16 @@ const state = {
   isConnected: false,
   isSocketConnected: false,
   allUsers: [],
-  messages: []
+  messages: [],
+  connectedUsers: []
 };
 
 const getters = {
   webSocket: state => state.webSocket,
   isSocketConnected: state => state.isSocketConnected,
-  allCategories: state => state.allCategories,
   allUsers: state => state.allUsers,
-  allMessages: state => state.messages
+  allMessages: state => state.messages,
+  connectedUsers: state => state.connectedUsers
 };
 
 const actions = {
@@ -41,6 +42,10 @@ const actions = {
       });
 
       commit(types.SET_WEBSOCKET, socket);
+      
+      socket.on("connected-users", function(data) {
+        commit(types.UPDATE_CONNECTED_USERS, data);
+      });
 
       socket.on("disconnect", () => {
         commit(types.SET_SOCKET_CONNECTION, false);
@@ -99,6 +104,10 @@ const mutations = {
 
   [types.UPDATE_ALL_MESSAGE] (state, data) {
     state.messages = data;
+  },
+
+  [types.UPDATE_CONNECTED_USERS] (state, data) {
+    state.connectedUsers = data;
   }
 };
 

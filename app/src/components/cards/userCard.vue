@@ -8,11 +8,14 @@
     <div class="username">
         {{ user.username }}
     </div>
+    <div v-bind:class="{'online-icon': isActive}">
+    </div>
   </b-list-group-item>
 </template>
 
 <script>
 import bListGroupItem from "bootstrap-vue/es/components/list-group/list-group-item";
+import { mapGetters } from 'vuex';
 
 export default {
   props: {
@@ -23,18 +26,32 @@ export default {
     "b-list-group-item": bListGroupItem
   },
 
-  data () { 
-    return {
-      isActive:false,
-      active1: {
-        "background-color" : "yellow"
-      }
+  computed: {
+    ...mapGetters({
+      connectedUsers:"connectedUsers"
+    }),
+
+    isActive () {
+      let index = this.connectedUsers.findIndex(x => x.id === this.user.id);
+
+      return (index > -1 ) ? true : false;
     }
   },
 
+  // mounted () {
+  //   setInterval(() => {
+  //     let index = this.connectedUsers.findIndex(x => x.id === this.user.id);
+
+  //     let data = this.isActive;
+
+  //     if (index > -1) {
+  //       this.isActive = !data;
+  //     }
+  //   }, 500)
+  // },
+
   methods: {
     changeSelectedUser() {
-      this.isActive = true;
       this.$store.dispatch("setSelectedUser", this.user);
     }
   }
@@ -62,5 +79,13 @@ export default {
     height:2.8rem;
     border-radius: 1.4rem;
   }
+}
+
+.online-icon {
+  height: 10px;
+  width: 10px;
+  background-color: green;
+  border-radius: 50%;
+  margin-left: auto;
 }
 </style>

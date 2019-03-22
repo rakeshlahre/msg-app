@@ -100,6 +100,7 @@ export default {
 <style lang="scss">
   .left {
     text-align: left;
+    padding-left:10px;
   }
   .right {
     text-align: right;

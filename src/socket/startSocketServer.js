@@ -19,6 +19,8 @@ startSocketServer = function( server, db) {
     next();
   });
 
+  const connectedUsers = [];
+
   io.on('connection', async function (socket) {
     console.log('connected to socket');
     const currentUser = socket.request.currentUser;
@@ -27,9 +29,20 @@ startSocketServer = function( server, db) {
     let messsages = [];
     if (currentUser) {
       socket.join(currentUsername);
+
       socket.join(currentUser.id);
 
+      let index = connectedUsers.findIndex(x => x.id === currentUser.id);
+
+      if (index < 0) {
+        connectedUsers.push(currentUser);
+      }
+
       messsages = await db.users.getUserMessages(currentUser.id);
+
+      socket.join('public');
+
+      io.to('public').emit('connected-users', connectedUsers);
     }
 
     const transformMessages = messsages.map(x => {return {fromUserId : x.from_user_id, toUserId: x.to_user_id, fromUserName: x.from_username, toUserName: x.to_username, message: x.message}});
@@ -57,6 +70,13 @@ startSocketServer = function( server, db) {
     });
 
     socket.on('disconnect', function () {
+      if (currentUser) {
+        let index = connectedUsers.findIndex(x => x.id === currentUser.id);
+
+        connectedUsers.splice(index, 1);
+        
+        io.to('public').emit('connected-users', connectedUsers);
+      }
     });
 
     socket.on('error', function (e) {

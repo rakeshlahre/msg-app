@@ -56,6 +56,7 @@ export const auth = {
           router.push({ path: "/chat" });
         }
       } catch (error) {
+        context.commit(types.SET_IS_AUTHENTICATED, false);
         console.log(error);
       }
     },
