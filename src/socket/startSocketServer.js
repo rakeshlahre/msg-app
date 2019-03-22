@@ -73,7 +73,9 @@ startSocketServer = function( server, db) {
       if (currentUser) {
         let index = connectedUsers.findIndex(x => x.id === currentUser.id);
 
-        connectedUsers.splice(index, 1);
+        if (index > -1) {
+          connectedUsers.splice(index, 1);
+        }
         
         io.to('public').emit('connected-users', connectedUsers);
       }
