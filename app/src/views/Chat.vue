@@ -62,6 +62,11 @@ export default {
     }),
 
     messages () {
+      this.$nextTick(function () {
+        let a = document.getElementById("msg-area");
+        a.scrollTop = a.scrollHeight;
+      });
+
       return this.allMessages.filter(x => {return (x.toUserId === this.selected.id) || (x.fromUserId === this.selected.id)})
     }
   },
