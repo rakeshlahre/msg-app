@@ -28,6 +28,16 @@ const startHttpServer = async function () {
     return req.id;
   });
 
+  app.use(function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', 'http://localhost:8080');
+    next();
+  });
+
+  app.use(cors({
+    credentials: true,
+    origin: ['https://chat-msg-app-frontend.herokuapp.com', 'localhost:8080', 'localhost:8081']
+  }));
+
   app.use(logger(":id :remote-addr :method :url :status :response-time"));
 
   app.use('/health-check', (req, res) => {res.send('ok');});
