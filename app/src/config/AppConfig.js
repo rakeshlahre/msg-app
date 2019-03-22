@@ -1,4 +1,4 @@
 export default {
-  API_URL: process.env.API_URL || "http://localhost:3002/api/",
-  SOCKET_URL: "http://localhost:3002"
+  API_URL: process.env.API_URL || "https://chat-msg-app.herokuapp.com/api/",
+  SOCKET_URL: "https://chat-msg-app.herokuapp.com"
 };
